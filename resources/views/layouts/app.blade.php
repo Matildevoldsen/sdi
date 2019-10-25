@@ -8,7 +8,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }} {{ app()->version() }}</title>
+        <title>{{ config('app.name', 'Love Of Portugal') }}</title>
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -18,7 +18,7 @@
             <nav class="navbar has-shadow">
                 <div class="container">
                     <div class="navbar-brand">
-                        <a href="{{ url('/') }}" class="navbar-item">{{ config('app.name', 'Laravel') }}</a>
+                        <a href="{{ url('/') }}" class="navbar-item">{{ config('app.name', 'Love Of Portugal') }}</a>
 
                         <div class="navbar-burger burger" data-target="navMenu">
                             <span></span>
@@ -55,6 +55,7 @@
                     </div>
                 </div>
             </nav>
+
             @yield('content')
         </div>
 
