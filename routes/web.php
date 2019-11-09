@@ -13,4 +13,10 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-
+Route::get('om-mig', 'AboutController@index')->name('about');
+Route::get('artikel/ny', 'PostController@create')->name('post.new');
+Route::get('katogori/vis/{id}', 'CategoryController@view')->name('category.show');
+Route::get('katogori/new', 'CategoryController@index')->name('category.showForm');
+Route::post('katogori/slet', 'CategoryController@destroy')->name('category.delete');
+Route::post('katogori/new', 'CategoryController@store')->name('category.new');
+Route::get('artikel/{id}/s-{slug}', 'PostController@show')->name('post.show');

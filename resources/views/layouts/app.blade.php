@@ -8,9 +8,10 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Love Of Portugal') }}</title>
+        <title>{{ config('app.name', 'Love Of Portugal') }} @yield('title')</title>
 
         <!-- Styles -->
+        @yield('stylesheets')
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
@@ -28,17 +29,28 @@
                     </div>
 
                     <div class="navbar-menu" id="navMenu">
-                        <div class="navbar-start"></div>
+                        <div class="navbar-start">
+                            <a class="navbar-item" href="{{ route('home') }}">
+                                Forside
+                            </a>
+
+                            <a class="navbar-item" href="{{ route('about') }}">
+                                Om Mig
+                            </a>
+                        </div>
 
                         <div class="navbar-end">
-                            @if (Auth::guest())
-                                <a class="navbar-item " href="{{ route('login') }}">Login</a>
-                                <a class="navbar-item " href="{{ route('register') }}">Register</a>
-                            @else
+                            @if (!Auth::guest())
                                 <div class="navbar-item has-dropdown is-hoverable">
                                     <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
 
                                     <div class="navbar-dropdown">
+                                        <a class="navbar-item" href="{{ route('post.new') }}">
+                                            Ny Artikel
+                                        </a>
+                                        <a class="navbar-item" href="{{ route('category.showForm') }}">
+                                            Ny Katogori
+                                        </a>
                                         <a class="navbar-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                             Logout
@@ -56,10 +68,17 @@
                 </div>
             </nav>
 
+            @if(Session::has('message'))
+            <span class="notification is-primary">
+                {{ Session::get('message') }}
+            </span>
+            @endif
+
             @yield('content')
         </div>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>
