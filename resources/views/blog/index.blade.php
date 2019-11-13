@@ -195,8 +195,9 @@
                 processData: false,
                 data: data,
                 success: function(data) {
-                    if (data.success == true) {
-                        window.location.replace(data.to);
+                    if (data.data.to) {
+                        const to = data.data.to;
+                        window.location.replace(to);
                     }
                 },
                 error   : function ( jqXhr, json, errorThrown )

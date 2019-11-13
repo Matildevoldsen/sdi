@@ -20,3 +20,4 @@ Route::get('katogori/new', 'CategoryController@index')->name('category.showForm'
 Route::post('katogori/slet', 'CategoryController@destroy')->name('category.delete');
 Route::post('katogori/new', 'CategoryController@store')->name('category.new');
 Route::get('artikel/{id}/s-{slug}', 'PostController@show')->name('post.show');
+Route::get('artikel/slet-{id}', 'PostController@delete')->name('post.destroy');

@@ -60,7 +60,7 @@ class CategoryController extends Controller
         $tag = Category::find($request->identification);
 
         if ($tag) {
-            $tag->posts()->detach();
+            $tag->posts()->delete();
             $tag->delete();
             Session::flash('success', 'Katogori er slettet');
             return redirect()->route('category.showForm');

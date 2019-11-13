@@ -6,6 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSRF Token -->
+        @if(Session::has('message'))
+        <link href="lib/noty.css" rel="stylesheet">
+        <link href="lib/themes/metroui.css" rel="stylesheet">
+        @endif
+
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Love Of Portugal') }} @yield('title')</title>
@@ -68,17 +73,24 @@
                 </div>
             </nav>
 
-            @if(Session::has('message'))
-            <span class="notification is-primary">
-                {{ Session::get('message') }}
-            </span>
-            @endif
-
             @yield('content')
         </div>
+        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
+
+        @if(Session::has('message'))
+        <script src="lib/noty.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+        new Noty({
+            theme: 'metroui',
+            type: 'info',
+            layout: 'topRight',
+            text: '{{ Session::get('message') }}'
+        }).show();
+        </script>
+        @endif
     </body>
 </html>

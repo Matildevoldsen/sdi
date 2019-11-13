@@ -48,10 +48,15 @@ class PostController extends Controller
             $post->meta_title_dk = $request->title_dk;
             $post->meta_desc_dk = $request->meta_desc_dk;
             $post->content_dk = html_entity_decode($request->content_dk);
-            $imageName = $request->thumbnail;
+            $path = $request->file('thumbnail')->store('public/thumbnails');
 
-            $request->thumbnail->move(public_path('public/thumbnail'), $imageName);
-            $post->thumbnail = $imageName;
+            if ($path) {
+                $post->thumbnail = basename($path);
+            } else {
+
+                dd($path);
+            }
+
             $post->save();
             $post->category()->sync($request->category_id, false);
 
@@ -59,7 +64,7 @@ class PostController extends Controller
                 'data' => [
                     'post' => $post,
                     'success' => true,
-                    'to' => 'artikel/' . $post->id . '/s-' . $post->slug,
+                    'to' =>  $post->id . '/s-' . $post->slug,
                     'message' => 'Artikel Oprettet',
                 ]
             ]);
@@ -93,6 +98,13 @@ class PostController extends Controller
     public function update()
     { }
 
-    public function delete()
-    { }
+    public function delete($id)
+    { 
+        $post = Post::find($id);
+        $post->category()->detach();
+        $post->category()->detach();
+        $post->delete();
+        Session::flash('message', 'Artiklen er slettet.');
+        return redirect()->route('home');
+    }
 }
