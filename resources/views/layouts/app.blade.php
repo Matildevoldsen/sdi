@@ -42,6 +42,17 @@
                             <a class="navbar-item" href="{{ route('about') }}">
                                 Om Mig
                             </a>
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link" href="#">Kategorier</a>
+
+                                <div class="navbar-dropdown">
+                                    @foreach ($categories as $category)
+                                        <a class="navbar-item" href="{{ route('category.show', $category->id) }}">
+                                            {{ $category->title_dk }}
+                                        </a>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
 
                         <div class="navbar-end">
@@ -55,6 +66,9 @@
                                         </a>
                                         <a class="navbar-item" href="{{ route('category.showForm') }}">
                                             Ny Katogori
+                                        </a>
+                                        <a class="navbar-item" href="{{ route('settings.edit') }}">
+                                            Side Indstillinger
                                         </a>
                                         <a class="navbar-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();document.getElementById('logout-form').submit();">

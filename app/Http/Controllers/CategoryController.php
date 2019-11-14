@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -25,15 +26,16 @@ class CategoryController extends Controller
         $tag->desc_en = 'no content';
         $tag->save();
 
-        Session::flash('success', 'Katogori er oprettet!');
-        return redirect()->route('blog.categories.index', $tag->id);
+        Session::flash('message', 'Katogori er oprettet!');
+        return redirect()->back();
     }
 
     public function view($id)
     {
         $category = Category::find($id);
+        $posts = Post::all()->where('category_id', $id);
 
-        return view('blog.categories.view')->withCategory($category);
+        return view('blog.categories.view')->withCategory($category)->withPosts($posts);
     }
 
     public function edit($id)
