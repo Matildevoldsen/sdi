@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\TopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -13,7 +14,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('blog.categories.index')->withCategory($categories);
+        $topCategories = TopCategory::all();
+
+        return view('blog.categories.index')->withCategories($categories)->withTopCategory($topCategories);
     }
 
     public function store(Request $request)
@@ -22,6 +25,7 @@ class CategoryController extends Controller
         $tag = new Category;
         $tag->title_dk = $request->title_dk;
         $tag->desc_dk = $request->desc_dk;
+        $tag->top_category_id = $request->top_category_id;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
         $tag->save();

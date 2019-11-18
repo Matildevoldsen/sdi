@@ -15,8 +15,9 @@
                 </header>
 
                 <div class="card-content">
+                    <p><b>Over Katogori</b>: {{ $category->topCategory->title_dk }}</p>
                     <p><b>Navn</b>: {{ $category->title_dk }}</p>
-                    <p><b>Beskrivelse</b>: {{ $category->desc_dk }}</p>
+                    <p><b>Beskrivelse</b>: {{ $category->title_dk }}</p>
 
                     @if (!Auth::guest() && Auth::user()->is_admin)
                         <form action="{{ route('category.delete') }}" method="post">

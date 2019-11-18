@@ -12,4 +12,8 @@ class Category extends Model
     {
     	return $this->hasMany('App\Post');
     }
+
+    public function topCategory() {
+        return $this->belongsTo('App\TopCategory');
+    }
 }

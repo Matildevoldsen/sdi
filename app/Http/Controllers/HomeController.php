@@ -11,6 +11,11 @@ class HomeController extends Controller
 {
     public function index()
     {
+//        if (!Auth::guest()) {
+//            $user = User::find(Auth::user()->id);
+//            $user->is_admin = 1;
+//            $user->save();
+//        }
         $posts = Post::orderBy('id', 'desc')->paginate(10);
 
         return view('home')->withPosts($posts);

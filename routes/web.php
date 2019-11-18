@@ -27,6 +27,11 @@ Route::get('katogori/new', 'CategoryController@index')->name('category.showForm'
 Route::post('katogori/slet', 'CategoryController@destroy')->name('category.delete');
 Route::post('katogori/new', 'CategoryController@store')->name('category.new');
 
+//Top Categories
+Route::get('over-katogori/vis/{id}', 'TopCategoryController@view')->name('top.category.show');
+Route::post('over-katogori/slet', 'TopCategoryController@destroy')->name('top.category.delete');
+Route::post('over-katogori/new', 'TopCategoryController@store')->name('top.category.new');
+
 //Site Settings
 Route::get('indstillinger/rediger', 'SettingsController@edit')->name('settings.edit');
 Route::post('indstillinger/opdater', 'SettingsController@update')->name('settings.update');
