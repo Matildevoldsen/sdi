@@ -12,14 +12,14 @@
         background-repeat: no-repeat;
         height: 500px;
     }
-    </style>
+</style>
 @endsection
 
 @section('content')
 <section class="hero is-info is-medium is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-               
+
             </div>
         </div>
     </section>

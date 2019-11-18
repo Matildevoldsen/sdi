@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-        <link href="/lib/noty.css" rel="stylesheet">
-        <link href="/lib/themes/metroui.css" rel="stylesheet">
+    <link href="/lib/noty.css" rel="stylesheet">
+    <link href="/lib/themes/metroui.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Love Of Portugal') }} @yield('title')</title>
@@ -17,14 +17,14 @@
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <script src="/lib/noty.js" type="text/javascript"></script>
 
-        <script type="text/javascript">
-            new Noty({
-                theme: 'metroui',
-                type: 'info',
-                layout: 'topRight',
-                text: 'dd'
-            }).show();
-        </script>
+    <script type="text/javascript">
+        new Noty({
+            theme: 'metroui',
+            type: 'info',
+            layout: 'topRight',
+            text: 'dd'
+        }).show();
+    </script>
 </head>
 <body>
 <div id="app">
