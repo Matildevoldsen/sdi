@@ -18,14 +18,16 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
-        return view('posts.index')->withPosts($posts);
+        return view('blog.index')->withPosts($posts);
     }
 
     public function create()
     {
-        if (!Auth::guest() && Auth::user()->is_admin) {
+        if (!Auth::guest() && Auth::user()->is_admin == 1) {
             $categories = Category::all();
             return view('blog.index')->withCategories($categories);
+        } else {
+            return redirect()->back();
         }
     }
 
@@ -33,10 +35,10 @@ class PostController extends Controller
     {
         // validate the data
         $validate = $this->validate($request, array(
-            'title_dk'         => 'required|max:255',
-            'slug'          => 'required|alpha_dash|min:3|max:255|unique:posts,slug',
-            'category_id'   => 'required|integer',
-            'content_dk'          => 'required|min:50'
+            'title_dk' => 'required|max:255',
+            'slug' => 'required|alpha_dash|min:3|max:255|unique:posts,slug',
+            'category_id' => 'required|integer',
+            'content_dk' => 'required|min:50'
         ));
 
         if ($validate) {
@@ -64,7 +66,7 @@ class PostController extends Controller
                 'data' => [
                     'post' => $post,
                     'success' => true,
-                    'to' =>  $post->id . '/s-' . $post->slug,
+                    'to' => $post->id . '/s-' . $post->slug,
                     'message' => 'Artikel Oprettet',
                 ]
             ]);
@@ -78,7 +80,8 @@ class PostController extends Controller
         }
     }
 
-    public function show($id, $slug) {
+    public function show($id, $slug)
+    {
         $post = Post::find($id);
         $postWithSlug = Post::where('slug', $slug)->first();
 
@@ -92,14 +95,83 @@ class PostController extends Controller
         }
     }
 
-    public function edit()
-    { }
+    public function edit($id)
+    {
+        if (!Auth::guest() && Auth::user()->is_admin == 1) {
+            $post = Post::find($id);
+            $categories = Category::all();
 
-    public function update()
-    { }
+            return view('blog.edit')->withArticle($post)->withCategories($categories);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $post = Post::find($request->idNum);
+
+        // validate the data
+        if ($post->slug == $request->slug) {
+            $validate = $this->validate($request, array(
+                'title_dk' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:3|max:255',
+                'category_id' => 'required|integer',
+                'content_dk' => 'required|min:50'
+            ));
+        } else {
+            $validate = $this->validate($request, array(
+                'title_dk' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:3|max:255|unique:posts,slug',
+                'category_id' => 'required|integer',
+                'content_dk' => 'required|min:50'
+            ));
+        }
+
+        if ($validate && $post) {
+            // store in the database
+            $post->title_dk = $request->title_dk;
+            $post->slug = $request->slug;
+            $post->category_id = $request->category_id;
+            $post->meta_title_dk = $request->title_dk;
+            $post->meta_desc_dk = $request->meta_desc_dk;
+            $post->content_dk = html_entity_decode($request->content_dk);
+            if (isset($request->thumbnail) && !$request->thumbnail) {
+                $path = $request->file('thumbnail')->store('public/thumbnails');
+
+                if ($path) {
+                    $post->thumbnail = basename($path);
+                } else {
+                    return response()->json([
+                        'data' => [
+                            'success' => false,
+                            'errors' => 'Cannot upload picture',
+                        ]
+                    ]);
+                }
+            }
+
+            $post->save();
+            $post->category()->sync($request->category_id, false);
+
+            return response()->json([
+                'data' => [
+                    'post' => $post,
+                    'success' => true,
+                    'to' => $post->id . '/s-' . $post->slug,
+                    'message' => 'Artikel Oprettet',
+                ]
+            ]);
+        } else {
+            return response()->json([
+                'data' => [
+                    'success' => false,
+                    'errors' => $validate,
+                ]
+            ]);
+        }
+    }
 
     public function delete($id)
-    { 
+    {
         $post = Post::find($id);
         $post->category()->detach();
         $post->category()->detach();

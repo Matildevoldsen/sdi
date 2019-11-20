@@ -7,72 +7,74 @@
 @endsection
 
 @section('content')
-<div class="columns is-marginless is-centered">
-    <div class="column is-7">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">Ny Artikel</p>
-            </header>
+    <div class="columns is-marginless is-centered">
+        <div class="column is-7">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Ny Artikel</p>
+                </header>
 
-            <div class="notification is-danger" id="info" style="display: none;"></div>
+                <div class="notification is-danger" id="info" style="display: none;"></div>
 
-            <div class="card-content">
-                <form class="register-form" method="POST" enctype="multipart/form-data">
+                <div class="card-content">
+                    <form class="register-form" method="POST" enctype="multipart/form-data">
 
-                    {{ csrf_field() }}
+                        {{ csrf_field() }}
 
-                    <div class="field is-horizontal">
-                        <div class="field-label">
-                            <label class="title_dk">Title</label>
-                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="title_dk">Title</label>
+                            </div>
 
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" id="title_dk" type="text" name="title_dk" value="{{ old('title_dk') }}"
-                                    placeholder="Navnet på artiklen" required autofocus>
-                                </p>
-
-                                @if ($errors->has('title_dk'))
-                                    <p class="help is-danger">
-                                        {{ $errors->first('title_dk') }}
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <input class="input" id="title_dk" type="text" name="title_dk"
+                                               value="{{ old('title_dk') }}"
+                                               placeholder="Navnet på artiklen" required autofocus>
                                     </p>
-                                @endif
+
+                                    @if ($errors->has('title_dk'))
+                                        <p class="help is-danger">
+                                            {{ $errors->first('title_dk') }}
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label">
-                            <label class="slug">Artikel Link</label>
-                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="slug">Artikel Link</label>
+                            </div>
 
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" id="slug" type="text" name="slug" value="{{ old('slug') }}"
-                                    placeholder="/post/første-dag-i-portugal" required autofocus>
-                                </p>
-
-                                @if ($errors->has('slug'))
-                                    <p class="help is-danger">
-                                        {{ $errors->first('slug') }}
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <input class="input" id="slug" type="text" name="slug" value="{{ old('slug') }}"
+                                               placeholder="/post/første-dag-i-portugal" required autofocus>
                                     </p>
-                                @endif
+
+                                    @if ($errors->has('slug'))
+                                        <p class="help is-danger">
+                                            {{ $errors->first('slug') }}
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
+                        <div class="field is-horizontal">
                             <div class="field-label">
                                 <label class="thumbnail">Artikel Billede</label>
                             </div>
 
                             <div class="field-body">
-                                    <div class="file is-primary">
-                                            <label class="file-label">
-                                              <input id="inputGroupFile01" class="file-input custom-file-input" type="file" name="resume">
-                                              <span class="file-cta">
+                                <div class="file is-primary">
+                                    <label class="file-label">
+                                        <input id="inputGroupFile01" class="file-input custom-file-input" type="file"
+                                               name="resume">
+                                        <span class="file-cta">
                                                 <span class="file-icon">
                                                   <i class="fas fa-upload"></i>
                                                 </span>
@@ -80,91 +82,93 @@
                                                   Artikel Billede
                                                 </span>
                                               </span>
-                                            </label>
-                                          </div>
+                                    </label>
+                                </div>
                             </div>
-                    </div>
+                        </div>
 
-                    <div id="preview">
+                        <div id="preview">
                             <p id="img_preview_txt"><a href="#preview" id="show_img"></a></p>
 
                             <img id="preview_img" class="img-fluid" src="#"/>
                         </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label">
-                            <label class="meta_desc_dk">Artikel Beskrivelse (kort)</label>
-                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="meta_desc_dk">Artikel Beskrivelse (kort)</label>
+                            </div>
 
-                        <div class="field-body">
-                            <div class="field">
-                                <p class="control">
-                                    <input class="input" id="meta_desc_dk" type="text" name="meta_desc_dk" value="{{ old('meta_desc_dk') }}"
-                                    max="160" required autofocus>
-                                </p>
-
-                                @if ($errors->has('meta_desc_dk'))
-                                    <p class="help is-danger">
-                                        {{ $errors->first('meta_desc_dk') }}
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <input class="input" id="meta_desc_dk" type="text" name="meta_desc_dk"
+                                               value="{{ old('meta_desc_dk') }}"
+                                               max="160" required autofocus>
                                     </p>
-                                @endif
+
+                                    @if ($errors->has('meta_desc_dk'))
+                                        <p class="help is-danger">
+                                            {{ $errors->first('meta_desc_dk') }}
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-label">
-                            <label class="category">Katogori</label>
-                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="category">Katogori</label>
+                            </div>
 
-                        <div class="field-body">
-                            <select class="select" id="category" name="categories[]">
+                            <div class="field-body">
+                                <select class="select" id="category" name="categories[]">
                                     @foreach($categories as $category)
                                         <option value='{{ $category->id }}'>{{ $category->title_dk }}</option>
                                     @endforeach
                                 </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <div id="editor">
-                            <h2>Artikel Indhold</h2>
+                        <div class="field">
+                            <div id="editor">
+                                <h2>Artikel Indhold</h2>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="field is-horizontal">
-                        <div class="field-body">
-                            <div class="field is-grouped">
-                                <div class="control">
-                                    <button type="submit" class="button is-primary" id="submitForm">Opret Artikel</button>
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button type="submit" class="button is-primary" id="submitForm">Opret Artikel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 
 @section('scripts')
     <!-- Include the Quill library -->
-<!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
 
-<script>
-    var quill = new Quill('#editor', {
-        theme: 'snow'
-    });
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
 
-    $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
 
         $('#submitForm').on('click', function (e) {
@@ -194,23 +198,22 @@
                 contentType: false,
                 processData: false,
                 data: data,
-                success: function(data) {
+                success: function (data) {
                     if (data.data.to) {
                         const to = data.data.to;
                         window.location.replace(to);
                     }
                 },
-                error   : function ( jqXhr, json, errorThrown )
-        {
-            $('#info').hide();
-            $('#info').show();
-            var errors = jqXhr.responseJSON.errors;
-            var errorsHtml= '';
-            $.each( errors, function( key, value ) {
-                errorsHtml += '<li>' + value[0] + '</li>';
-            });
-            $('#info').html( errorsHtml , "Error " + jqXhr.status +': '+ errorThrown);
-        }
+                error: function (jqXhr, json, errorThrown) {
+                    $('#info').hide();
+                    $('#info').show();
+                    var errors = jqXhr.responseJSON.errors;
+                    var errorsHtml = '';
+                    $.each(errors, function (key, value) {
+                        errorsHtml += '<li>' + value[0] + '</li>';
+                    });
+                    $('#info').html(errorsHtml, "Error " + jqXhr.status + ': ' + errorThrown);
+                }
             });
         });
     </script>

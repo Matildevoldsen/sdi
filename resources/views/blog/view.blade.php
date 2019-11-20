@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
 @section('stylesheets')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<style type="text/css">
-    .hero {
-        background-image: url('{{ asset('storage/thumbnails/' . $post->thumbnail) }}') !important;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 500px;
-    }
-</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet'
+          href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style type="text/css">
+        .hero {
+            background-image: url('{{ asset('storage/thumbnails/' . $post->thumbnail) }}') !important;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 500px;
+        }
+    </style>
 @endsection
 
 @section('content')
-<section class="hero is-info is-medium is-bold">
+    <section class="hero is-info is-medium is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
 
@@ -46,24 +47,25 @@
                         </div>
                         <div class="content article-body">
                             <p>{!! $post->content_dk !!}</p>
-                            @if (!Auth::guest() && Auth::user()->is_admin)
-                                <a href="{{ route('post.destroy', $post->id) }}" class="button is-danger">Slet Artikel</a>  <input type="button" value="Rediger Artikel" class="button is-primary"/>
+                            @if (!Auth::guest() && Auth::user()->is_admin == 1)
+                                <a href="{{ route('post.destroy', $post->id) }}" class="button is-danger">Slet
+                                    Artikel</a>  <a href="{{ route('post.edit', $post->id) }}" class="button is-primary">Rediger Artikel</a>
                             @endif
 
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
 
         </section>
         <!-- END ARTICLE FEED -->
-        </div>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-        //The first argument are the elements to which the plugin shall be initialized
-        //The second argument has to be at least a empty object or a object with your desired options
-        OverlayScrollbars(document.querySelectorAll("body"), { });
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/js/OverlayScrollbars.min.js'></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            //The first argument are the elements to which the plugin shall be initialized
+            //The second argument has to be at least a empty object or a object with your desired options
+            OverlayScrollbars(document.querySelectorAll("body"), {});
         });
-        </script>
+    </script>
 @endsection

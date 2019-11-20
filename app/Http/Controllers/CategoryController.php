@@ -6,6 +6,7 @@ use App\Category;
 use App\Post;
 use App\TopCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
@@ -13,10 +14,14 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
-        $topCategories = TopCategory::all();
+        if (!Auth::guest() && Auth::user()->is_admin == 1) {
+            $categories = Category::all();
+            $topCategories = TopCategory::all();
 
-        return view('blog.categories.index')->withCategories($categories)->withTopCategory($topCategories);
+            return view('blog.categories.index')->withCategories($categories)->withTopCategory($topCategories);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function store(Request $request)
@@ -44,8 +49,13 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        $tag = Category::find($id);
-        return view('tags.edit')->withTag($tag);
+        if (!Auth::guest() && Auth::user()->is_admin == 1) {
+            $tag = Category::find($id);
+            $topCategory = TopCategory::all();
+            return view('tags.edit')->withTag($tag)->withTopCategories($topCategory);
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function update(Request $request, $id)
@@ -55,6 +65,7 @@ class CategoryController extends Controller
         $tag->title_dk = $request->title_dk;
         $tag->title_en = $request->title_en;
         $tag->desc_dk = $request->desc_dk;
+        $tag->top_category_id = $request->top_category_id;
         $tag->desc_en = $request->desc_en;
         $tag->save();
         Session::flash('success', 'Successfully saved your new tag!');

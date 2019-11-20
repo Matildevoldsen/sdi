@@ -1,0 +1,93 @@
+@extends('layouts.app')
+
+@section('title', '| Opret Ny Katogori')
+
+@section('stylesheets')
+
+@endsection
+
+@section('content')
+    <div class="columns is-marginless is-centered">
+        <div class="column is-7">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Rediger Katogori</p>
+                </header>
+
+                <div class="card-content">
+
+                    @if(Session::has('success'))
+                        <p class="notification is-primary">{{ Session::get('success') }}</p>
+                    @endif
+                    <form class="register-form" method="POST" action="{{ route('category.new') }}">
+
+                        {{ csrf_field() }}
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="title_dk">Navn</label>
+                            </div>
+
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <input class="input" id="title_dk" type="text" name="title_dk" value="{{ old('title_dk') }}"
+                                               placeholder="Katogori" required autofocus>
+                                    </p>
+                                </div>
+                                @if ($errors->has('title_dk'))
+                                    <p class="help is-danger">
+                                        {{ $errors->first('title_dk') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="desc_dk">Beskrivelse</label>
+                            </div>
+
+                            <div class="field-body">
+                                <div class="field">
+                                    <p class="control">
+                                        <input class="input" id="desc_dk" type="text" name="desc_dk" value="{{ old('desc_dk') }}"
+                                               placeholder="Beskriv Katogorien" required autofocus>
+                                    </p>
+                                </div>
+                                @if ($errors->has('desc_dk'))
+                                    <p class="help is-danger">
+                                        {{ $errors->first('desc_dk') }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label class="top_category_id">Katogori</label>
+                            </div>
+
+                            <div class="field-body">
+                                <select class="select" id="top_category_id" name="top_category_id">
+                                    @foreach($topCategory as $category)
+                                        <option value='{{ $category->id }}'>{{ $category->title_dk }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-body">
+                                <div class="field is-grouped">
+                                    <div class="control">
+                                        <button type="submit" class="button is-primary">Gem</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+@endsection

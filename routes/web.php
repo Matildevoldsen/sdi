@@ -20,6 +20,7 @@ Route::get('om-mig', 'AboutController@index')->name('about');
 Route::get('artikel/ny', 'PostController@create')->name('post.new');
 Route::get('artikel/{id}/s-{slug}', 'PostController@show')->name('post.show');
 Route::get('artikel/slet-{id}', 'PostController@delete')->name('post.destroy');
+Route::get('artikel/rediger-{id}', 'PostController@edit')->name('post.edit');
 
 //Category Sites
 Route::get('katogori/vis/{id}', 'CategoryController@view')->name('category.show');
