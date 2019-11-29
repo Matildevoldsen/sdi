@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-
     public function index()
     {
         if (!Auth::guest() && Auth::user()->is_admin == 1) {

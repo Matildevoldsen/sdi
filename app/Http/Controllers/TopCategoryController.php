@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Session;
 
 class TopCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('isAdmin');
+    }
+
     public function store(Request $request) {
         $this->validate($request, array('title_dk' => 'required|max:255'));
         $tag = new TopCategory;

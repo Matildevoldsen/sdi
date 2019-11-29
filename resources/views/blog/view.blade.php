@@ -41,7 +41,7 @@
                                             {{ $category->title_dk }}
                                         @endforeach
                                     </span>
-                                    <span class="tag is-rounded">{{ $post->created_at }}</span>
+                                    <span class="tag is-rounded">{{ $post->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style type="text/css">
         .hero {
-            background-image: url('{{ asset('storage/bg.jpg') }}') !important;
+            background-image: url('{{ asset('storage/thumbnail/' . $setting->thumbnail) }}') !important;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -20,7 +20,7 @@
     <section class="hero is-info is-medium is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <h1 class="title">Velkommen til Love Of Portugal</h1>
+                <h1 class="title">{{ $setting->welcome_dk }}</h1>
             </div>
         </div>
     </section>
@@ -40,7 +40,7 @@
                                         <p class="title article-title">{{ $post->title_dk }}</p>
                                         <div class="tags has-addons level-item">
                                             <span class="tag is-rounded is-info">{{ $category->title_dk }}</span>
-                                            <span class="tag is-rounded">{{ $post->created_at }}</span>
+                                            <span class="tag is-rounded">{{ $post->created_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
                                 </div>
