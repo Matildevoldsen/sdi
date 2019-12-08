@@ -25,6 +25,9 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::get('artikel/rediger-{id}', 'PostController@edit')->name('post.edit');
 
     //Category Sites
+    Route::get('katogori-top/rediger/{id}', 'TopCategoryController@edit')->name('categoryTop.edit');
+    Route::post('katogori-top/rediger/{id}', 'TopCategoryController@update')->name('categoryTop.edit');
+
     Route::get('katogori/new', 'CategoryController@index')->name('category.showForm');
     Route::get('katogori/rediger/{id}', 'CategoryController@edit')->name('category.edit');
     Route::post('katogori/rediger/{id}', 'CategoryController@update')->name('category.edit');

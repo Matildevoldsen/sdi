@@ -29,7 +29,7 @@
                             @foreach ($topCategory as $tcategory)
                                 <tr>
                                     <th>{{ $tcategory->id }}</th>
-                                    <td><a href="{{ route('category.show', $tcategory->id) }}">{{ $tcategory->title_dk }}</a></td>
+                                    <td><a href="{{ route('category.show', $tcategory->id) }}">{{ $tcategory->title_dk }}</a> | <a href="{{ route('categoryTop.edit', $tcategory->id) }}">Rediger</a> </td>
                                 </tr>
                             @endforeach
                             </tbody>

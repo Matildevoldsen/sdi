@@ -29,7 +29,7 @@ class TopCategoryController extends Controller
     public function edit($id) {
         $topCategory = TopCategory::find($id);
 
-        return view('blog.categories.edit')->withCategory($topCategory);
+        return view('blog.categories.editTop')->withCategory($topCategory);
     }
 
     public function update(Request $request, $id) {
