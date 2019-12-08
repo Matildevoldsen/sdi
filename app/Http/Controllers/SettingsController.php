@@ -39,7 +39,7 @@ class SettingsController extends Controller
         $setting->welcome_en = $request->welcome_en;
         $setting->main_site_desc = $request->main_site_desc;
 
-        if ($path = $request->file('thumbnail')->store('public/thumbnail')) {
+        if (isset($request->thumbnail) && $request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
             $setting->thumbnail = basename($path);
         }
 

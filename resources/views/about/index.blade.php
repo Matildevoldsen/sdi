@@ -445,7 +445,7 @@
                                         <div class="profile-preword"><span>Velkommen</span></div>
                                     </div>
                                     <h1 class="profile-title_t">
-                                        <span>Jeg er</span>
+                                        <span>Jeg hedder</span>
                                         Britt Wittrup
                                     </h1>
                                     <h2 class="profile-position">Blogger</h2></div>
@@ -456,7 +456,7 @@
                                     </li>
                                     <li class="clearfix">
                                         <strong class="title_t">Sprog</strong>
-                                        <span class="cont">Um pouco portugues, Engelsk, Dansk</span>
+                                        <span class="cont">Dansk, Engelsk, um pouco portugues</span>
                                     </li>
                                     <li class="clearfix">
                                         <strong class="title_t">E-mail</strong>

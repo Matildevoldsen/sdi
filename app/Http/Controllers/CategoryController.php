@@ -68,7 +68,7 @@ class CategoryController extends Controller
         $tag->desc_dk = $request->desc_dk;
         $tag->top_category_id = $request->top_category_id;
         $tag->desc_en = $request->desc_en;
-        if ($request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
+        if (isset($request->thumbnail) && $request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
             $tag->thumbnail = basename($path);
         }
         $tag->save();
