@@ -62,19 +62,18 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        $tag = Category::find($id);
-        $this->validate($request, ['name' => 'required|max:255']);
+        $tag = Category::find($request->id);
         $tag->title_dk = $request->title_dk;
         $tag->title_en = $request->title_en;
         $tag->desc_dk = $request->desc_dk;
         $tag->top_category_id = $request->top_category_id;
         $tag->desc_en = $request->desc_en;
-        if ($path = $request->file('thumbnail')->store('public/thumbnail')) {
+        if ($request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
             $tag->thumbnail = basename($path);
         }
         $tag->save();
         Session::flash('success', 'Successfully saved your new tag!');
-        return redirect()->route('blog.categories.view', $tag->id);
+        return redirect()->back();
     }
 
     public function destroy(Request $request)

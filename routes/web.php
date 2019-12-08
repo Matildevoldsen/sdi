@@ -26,11 +26,11 @@ Route::middleware(['isAdmin'])->group(function () {
 
     //Category Sites
     Route::get('katogori-top/rediger/{id}', 'TopCategoryController@edit')->name('categoryTop.edit');
-    Route::post('katogori-top/rediger/{id}', 'TopCategoryController@update')->name('categoryTop.edit');
+    Route::post('katogori-top/rediger/{id}', 'TopCategoryController@update')->name('categoryTop.update');
 
     Route::get('katogori/new', 'CategoryController@index')->name('category.showForm');
     Route::get('katogori/rediger/{id}', 'CategoryController@edit')->name('category.edit');
-    Route::post('katogori/rediger/{id}', 'CategoryController@update')->name('category.edit');
+    Route::post('katogori/rediger/{id}', 'CategoryController@update')->name('category.update');
     Route::post('katogori/slet', 'CategoryController@destroy')->name('category.delete');
     Route::post('katogori/new', 'CategoryController@store')->name('category.new');
 

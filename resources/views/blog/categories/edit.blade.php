@@ -19,10 +19,10 @@
                     @if(Session::has('success'))
                         <p class="notification is-primary">{{ Session::get('success') }}</p>
                     @endif
-                    <form class="register-form" method="POST" enctype="multipart/form-data" action="{{ route('category.edit', $category->id) }}">
+                    <form class="register-form" method="POST" enctype="multipart/form-data" action="{{ route('category.update', $category->id) }}">
 
                         {{ csrf_field() }}
-
+                        <input type="hidden" name="id" value="{{ $category->id }}">
                         <div class="field is-horizontal">
                             <div class="field-label">
                                 <label class="title_dk">Navn</label>

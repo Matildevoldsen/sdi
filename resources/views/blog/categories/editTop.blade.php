@@ -19,7 +19,7 @@
                     @if(Session::has('success'))
                         <p class="notification is-primary">{{ Session::get('success') }}</p>
                     @endif
-                    <form class="register-form" method="POST" enctype="multipart/form-data" action="{{ route('categoryTop.edit', $category->id) }}">
+                    <form class="register-form" method="POST" enctype="multipart/form-data" action="{{ route('categoryTop.update', $category->id) }}">
 
                         {{ csrf_field() }}
 
