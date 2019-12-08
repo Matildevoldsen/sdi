@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Setting;
+use Cassandra\Set;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -15,6 +16,13 @@ class SettingsController extends Controller
 
     public function edit()
     {
+//        $settingd = new Setting;
+//
+//        $settingd->welcome_dk = 'Velkommen';
+//        $settingd->main_site_desc = 'Velkommen';
+//        $settingd->welcome_en ='Velkommen';
+//        $settingd->thumbnail ='/dikd';
+//        $settingd->save();
         $setting = Setting::find(1);
 
         if ($setting) {

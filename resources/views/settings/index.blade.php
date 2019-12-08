@@ -15,7 +15,8 @@
                 </header>
 
                 <div class="card-content">
-                    <form class="login-form" enctype="multipart/form-data" method="POST" action="{{ route('settings.update') }}">
+                    <form class="login-form" enctype="multipart/form-data" method="POST"
+                          action="{{ route('settings.update') }}">
                         {{ csrf_field() }}
 
                         <div class="field is-horizontal">
@@ -27,7 +28,7 @@
                                 <div class="field">
                                     <p class="control">
                                         <input class="input" id="welcome_dk" type="text" name="welcome_dk"
-                                               value="{{ $setting->welcome_dk }}" required autofocus>
+                                               value="{{ $setting ? $setting->welcome_dk : '' }}" required autofocus>
                                     </p>
 
                                     @if ($errors->has('welcome_dk'))
@@ -94,7 +95,8 @@
                                 <div class="field">
                                     <p class="control">
                                         <input class="input" id="main_site_desc" type="text" name="main_site_desc"
-                                               value="{{ $setting->main_site_desc }}" required autofocus>
+                                               value="{{ $setting->main_site_desc }}" required
+                                               autofocus>
                                     </p>
 
                                     @if ($errors->has('main_site_desc'))

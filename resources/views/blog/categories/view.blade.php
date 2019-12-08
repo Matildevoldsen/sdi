@@ -3,32 +3,40 @@
 @section('title', '| ' . $category->title_dk )
 
 @section('stylesheets')
-
+    <style type="text/css">
+        .hero {
+            background-image: url('{{ asset('storage/thumbnail/' . $category->thumbnail) }}') !important;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 500px;
+        }
+    </style>
 @endsection
 
 @section('content')
+    <section class="hero is-info is-medium is-bold">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title">{{ $category->title_dk}}</h1>
+
+                <p>{{ $category->desc_dk }}</p>
+            </div>
+        </div>
+    </section>
+
     <div class="columns is-marginless is-centered">
         <div class="column is-7">
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Katogori - {{$category->title_dk}}</p>
-                </header>
+            @if (!Auth::guest() && Auth::user()->is_admin)
+                <form action="{{ route('category.delete') }}" method="post">
+                    {{ csrf_field() }}
 
-                <div class="card-content">
-                    <p><b>Over Katogori</b>: {{ $category->topCategory->title_dk }}</p>
-                    <p><b>Navn</b>: {{ $category->title_dk }}</p>
-                    <p><b>Beskrivelse</b>: {{ $category->title_dk }}</p>
+                    <input type="hidden" name="identification" value="{{ $category->id }}"/>
+                    <a class="button is-primary" href="{{ route('category.edit', $category->id) }}">Rediger</a>
+                    <input type="submit" value="Slet" class="button is-danger"/>
+                </form>
+            @endif
 
-                    @if (!Auth::guest() && Auth::user()->is_admin)
-                        <form action="{{ route('category.delete') }}" method="post">
-                            {{ csrf_field() }}
-
-                            <input type="hidden" name="identification" value="{{ $category->id }}"/>
-                            <br/><input type="submit" value="Slet" class="button is-danger"/>
-                        </form>
-                    @endif
-                </div>
-            </div>
             @forelse($posts as $post)
                 <div class="card article">
                     <div class="card-content">

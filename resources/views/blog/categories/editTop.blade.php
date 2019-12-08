@@ -66,45 +66,6 @@
                         </div>
 
                         <div class="field is-horizontal">
-                            <div class="field-label">
-                                <label class="top_category_id">Katogori</label>
-                            </div>
-
-                            <div class="field-body">
-                                <select class="select" id="top_category_id" name="top_category_id">
-                                    @foreach($topCategories as $category)
-                                        <option value='{{ $category->id }}'>{{ $category->title_dk }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="field is-horizontal">
-                            <div class="field-label">
-                                <label for="file-js-example" class="label">Baggrundsbillede</label>
-                            </div>
-
-                            <div class="field-body">
-                                <div id="file-js-example" class="file has-name">
-                                    <label class="file-label">
-                                        <input class="file-input" type="file" name="thumbnail">
-                                        <span class="file-cta">
-                                          <span class="file-icon">
-                                            <i class="fas fa-upload"></i>
-                                          </span>
-                                          <span class="file-label">
-                                            Vælg en fil
-                                          </span>
-                                        </span>
-                                        <span class="file-name">
-                                          Ingen Fil Valgt
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field is-horizontal">
                             <div class="field-body">
                                 <div class="field is-grouped">
                                     <div class="control">
@@ -120,13 +81,5 @@
         @endsection
 
         @section('scripts')
-            <script>
-                const fileInput = document.querySelector('#file-js-example input[type=file]');
-                fileInput.onchange = () => {
-                    if (fileInput.files.length > 0) {
-                        const fileName = document.querySelector('#file-js-example .file-name');
-                        fileName.textContent = fileInput.files[0].name;
-                    }
-                }
-            </script>
-        @endsection
+
+@endsection

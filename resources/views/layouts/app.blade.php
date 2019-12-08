@@ -82,6 +82,9 @@
                                 <a class="navbar-item" href="{{ route('category.showForm') }}">
                                     Ny Katogori
                                 </a>
+                                <a class="navbar-item" href="{{ route('about.edit') }}">
+                                    Rediger Om mig
+                                </a>
                                 <a class="navbar-item" href="{{ route('settings.edit') }}">
                                     Side Indstillinger
                                 </a>
@@ -104,9 +107,9 @@
 
     @yield('content')
 </div>
-<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
-
 <!-- Scripts -->
 @yield('scripts')
+<script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
+
 </body>
 </html>

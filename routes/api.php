@@ -15,3 +15,4 @@ use Illuminate\Http\Request;
 
 Route::post('artikel/opret', 'PostController@store');
 Route::post('artikel/rediger', 'PostController@update');
+Route::post('om-mig/rediger', 'AboutController@update');

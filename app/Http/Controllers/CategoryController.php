@@ -32,6 +32,9 @@ class CategoryController extends Controller
         $tag->top_category_id = $request->top_category_id;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
+        if ($path = $request->file('thumbnail')->store('public/thumbnail')) {
+            $tag->thumbnail = basename($path);
+        }
         $tag->save();
 
         Session::flash('message', 'Katogori er oprettet!');
@@ -51,7 +54,7 @@ class CategoryController extends Controller
         if (!Auth::guest() && Auth::user()->is_admin == 1) {
             $tag = Category::find($id);
             $topCategory = TopCategory::all();
-            return view('tags.edit')->withTag($tag)->withTopCategories($topCategory);
+            return view('blog.categories.edit')->withCategory($tag)->withTopCategories($topCategory);
         } else {
             return redirect()->back();
         }
@@ -66,6 +69,9 @@ class CategoryController extends Controller
         $tag->desc_dk = $request->desc_dk;
         $tag->top_category_id = $request->top_category_id;
         $tag->desc_en = $request->desc_en;
+        if ($path = $request->file('thumbnail')->store('public/thumbnail')) {
+            $tag->thumbnail = basename($path);
+        }
         $tag->save();
         Session::flash('success', 'Successfully saved your new tag!');
         return redirect()->route('blog.categories.view', $tag->id);
@@ -77,7 +83,10 @@ class CategoryController extends Controller
 
         if ($tag) {
             $tag->posts()->delete();
+
             $tag->delete();
+
+
             Session::flash('success', 'Katogori er slettet');
             return redirect()->route('category.showForm');
         } else {

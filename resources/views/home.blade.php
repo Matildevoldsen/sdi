@@ -5,22 +5,26 @@
     <link rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <style type="text/css">
-        .hero {
-            background-image: url('{{ asset('storage/thumbnail/' . $setting->thumbnail) }}') !important;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 500px;
-        }
-    </style>
+    @if ($setting)
+        <style type="text/css">
+            .hero {
+                background-image: url('{{ asset('storage/thumbnail/' . $setting->thumbnail) }}') !important;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 500px;
+            }
+        </style>
+    @endif
 @endsection
 
 @section('content')
     <section class="hero is-info is-medium is-bold">
         <div class="hero-body">
             <div class="container has-text-centered">
-                <h1 class="title">{{ $setting->welcome_dk }}</h1>
+                @if ($setting)
+                    <h1 class="title">{{ $setting->welcome_dk }}</h1>
+                @endif
             </div>
         </div>
     </section>

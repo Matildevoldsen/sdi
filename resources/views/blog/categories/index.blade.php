@@ -136,7 +136,7 @@
                         @if(Session::has('success'))
                             <p class="notification is-primary">{{ Session::get('success') }}</p>
                         @endif
-                    <form class="register-form" method="POST" action="{{ route('category.new') }}">
+                    <form class="register-form" method="POST" action="{{ route('category.new') }}" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 
@@ -157,6 +157,31 @@
                                     {{ $errors->first('title_dk') }}
                                 </p>
                             @endif
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <label for="file-js-example" class="label">Baggrundsbillede</label>
+                            </div>
+
+                            <div class="field-body">
+                                <div id="file-js-example" class="file has-name">
+                                    <label class="file-label">
+                                        <input class="file-input" type="file" name="thumbnail">
+                                        <span class="file-cta">
+                                          <span class="file-icon">
+                                            <i class="fas fa-upload"></i>
+                                          </span>
+                                          <span class="file-label">
+                                            Vælg en fil
+                                          </span>
+                                        </span>
+                                        <span class="file-name">
+                                          Ingen Fil Valgt
+                                        </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -208,7 +233,6 @@
         </div>
 </div>
 @endsection
-
 @section('scripts')
 
 @endsection
