@@ -466,17 +466,6 @@
                                         <strong class="title_t">Favoritrejsemål i Portugal</strong>
                                         <span class="cont">Porto, Azorerne</span>
                                     </li>
-                                    <!-- <li class="clearfix">
-                                      <strong class="title_t">Freelance</strong>
-                                      <span class="cont">till March 25, 2018</span>
-                                    </li>
-                                    <li class="clearfix">
-                                      <strong class="title_t"><span class="button">Vacation</span></strong>
-                                      <span class="cont">
-                                        <i class="rsicon rsicon-calendar"></i>
-                                        till April 15, 2018
-                                      </span>
-                                    </li> -->
                                 </ul>
                             </div>
                         </div>

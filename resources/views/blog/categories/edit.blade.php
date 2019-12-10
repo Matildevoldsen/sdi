@@ -52,9 +52,9 @@
                             <div class="field-body">
                                 <div class="field">
                                     <p class="control">
-                                        <input class="input" id="desc_dk" type="text" name="desc_dk"
-                                               value="{{ $category->desc_dk }}"
-                                               placeholder="Beskriv Katogorien" required autofocus>
+                                        <textarea class="input" id="desc_dk" type="text" name="desc_dk" placeholder="Beskriv Katogorien" required autofocus>
+                                            {{ nl2br(e($category->desc_dk)) }}
+                                        </textarea>
                                     </p>
                                 </div>
                                 @if ($errors->has('desc_dk'))

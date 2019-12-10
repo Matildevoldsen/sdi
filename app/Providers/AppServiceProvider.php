@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\TopCategory;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 use App\Category;
 use Illuminate\Support\Facades\View;
@@ -31,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
 
         $topCategories = TopCategory::all();
         View::share('topCategories', $topCategories);
+
+        Carbon::setLocale('dk');
 
         ini_set("memory_limit", "100M");
     }
