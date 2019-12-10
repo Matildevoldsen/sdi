@@ -3,15 +3,8 @@
 @section('title', '| ' . $category->title_dk )
 
 @section('stylesheets')
-    <style type="text/css">
-        .hero {
-            background-image: url('{{ asset('storage/thumbnail/' . $category->thumbnail) }}') !important;
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 500px;
-        }
-    </style>
+    <meta name="description" content="{{ Str::limit($category->desc_dk, $limit = 160) }}"/>
+    <style type="text/css">.hero {background-image: url('{{ asset('storage/thumbnail/' . $category->thumbnail) }}') !important;background-position: center;background-size: cover;background-repeat: no-repeat;height: 500px;}</style>
 @endsection
 
 @section('content')
