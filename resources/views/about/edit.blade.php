@@ -92,9 +92,11 @@
                         processData: false,
                         data: data,
                         success: function (data) {
-                            if (data.data.to) {
-                                const to = data.data.to;
-                                window.location.replace(to);
+                            if (data.data.success) {
+                                $('#info').hide();
+                                $('#info').show();
+                                $('#info').attr('class', 'notification is-primary');
+                                $('#info').html(data.data.message)
                             }
 
                             if (!data.data.success) {
