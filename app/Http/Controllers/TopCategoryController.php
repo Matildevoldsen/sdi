@@ -45,7 +45,12 @@ class TopCategoryController extends Controller
         return redirect()->back();
     }
 
-    public function delete() {
+    public function destroy(Request $request){
+        $tag = TopCategory::find($request->identification);
+        $tag->category()->delete();
+        $tag->delete();
 
+        Session::flash('success', 'Katogori er slettet');
+        return redirect()->back();
     }
 }

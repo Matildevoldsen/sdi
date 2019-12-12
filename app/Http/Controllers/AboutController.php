@@ -25,18 +25,31 @@ class AboutController extends Controller
         $about = About::find(1);
         $about->desc = $request['desc'];
 
-        if ($path = $request->file('bg')->store('public/thumbnail')) {
-            $about->bg = basename($path);
+        if ($request->hasFile('bg')) {
+            $path = $request->file('bg')->store('public/thumbnail');
+            if ($path) {
+                $about->bg = basename($path);
+            } else {
+                return response()->json([
+                    'data' => [
+                        'post' => $about,
+                        'success' => false,
+                        'to' => '',
+                        'message' => 'Problemer med at gemme billede.'
+                    ]
+                ]);
+            }
         }
-        $about->save();
 
+        $about->save();
         return response()->json([
             'data' => [
                 'post' => $about,
                 'success' => true,
                 'to' => '',
-                'message' => 'Artikel Oprettet',
+                'message' => 'Om mig siden opdateret',
             ]
         ]);
+
     }
 }

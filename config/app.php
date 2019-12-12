@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Love Of Portugal'),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'da',
 
     /*
     |--------------------------------------------------------------------------
@@ -228,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Webp' => Buglinjo\LaravelWebp\Facades\Webp::class,
     ],
 
 ];

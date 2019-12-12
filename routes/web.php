@@ -38,7 +38,6 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::get('over-katogori/vis/{id}', 'TopCategoryController@view')->name('top.category.show');
     Route::post('over-katogori/slet', 'TopCategoryController@destroy')->name('top.category.delete');
     Route::post('over-katogori/new', 'TopCategoryController@store')->name('top.category.new');
-
 //Site Settings
     Route::get('indstillinger/rediger', 'SettingsController@edit')->name('settings.edit');
     Route::post('indstillinger/opdater', 'SettingsController@update')->name('settings.update');

@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "buglinjo/laravel-webp": "^2.0",
         "fideloper/proxy": "^4.0",
         "laravel-frontend-presets/bulma": "^3.0",
         "laravel/framework": "^6.2",

@@ -29,7 +29,15 @@
                             @foreach ($topCategory as $tcategory)
                                 <tr>
                                     <th>{{ $tcategory->id }}</th>
-                                    <td><a href="{{ route('category.show', $tcategory->id) }}">{{ $tcategory->title_dk }}</a> | <a href="{{ route('categoryTop.edit', $tcategory->id) }}">Rediger</a> </td>
+                                    <td><a href="{{ route('category.show', $tcategory->id) }}">{{ $tcategory->title_dk }}</a> | <a href="{{ route('categoryTop.edit', $tcategory->id) }}">Rediger</a> |
+                                        @if (!Auth::guest() && Auth::user()->is_admin)
+                                            <form action="{{ route('top.category.delete') }}" method="post">
+                                                {{ csrf_field() }}
+
+                                                <input type="hidden" name="identification" value="{{ $tcategory->id }}"/>
+                                                <input type="submit" value="Slet" class="is-link"/>
+                                            </form>
+                                        @endif</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -193,8 +201,9 @@
                                 <div class="field-body">
                                     <div class="field">
                                         <p class="control">
-                                                <input class="input" id="desc_dk" type="text" name="desc_dk" value="{{ old('desc_dk') }}"
-                                                placeholder="Beskriv Katogorien" required autofocus>
+                                                 <textarea class="input" id="desc_dk" type="text" name="desc_dk" placeholder="Beskriv Katogorien" required autofocus>
+                                            {{ old('desc_dk') }}
+                                        </textarea>
                                         </p>
                                     </div>
                                     @if ($errors->has('desc_dk'))

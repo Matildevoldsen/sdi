@@ -71,6 +71,9 @@
                 });
 
 
+                quill.setText('');
+                quill.clipboard.dangerouslyPasteHTML(0, '{!! $about->desc !!}');
+
                 $('#submitForm').on('click', function (e) {
                     e.preventDefault();
 
@@ -92,6 +95,12 @@
                             if (data.data.to) {
                                 const to = data.data.to;
                                 window.location.replace(to);
+                            }
+
+                            if (!data.data.success) {
+                                $('#info').hide();
+                                $('#info').show();
+                                $('#info').html(data.data.message)
                             }
                         },
                         error: function (jqXhr, json, errorThrown) {

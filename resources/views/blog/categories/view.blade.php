@@ -38,7 +38,6 @@
                             @endif
                             <hr />
                             @forelse($posts as $post)
-
                                 <p class="title article-title has-text-centered">{{ $post->title_dk }}</p>
                                 <div class="tags has-addons level-item">
                                     <span class="tag is-rounded is-info">{{ $category->title_dk }}</span>
@@ -49,12 +48,11 @@
                                 {!! Str::limit($post->content_dk, $limit = 400) !!}
                                 <p><a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
                                         mere...</a></p>
-                                </p>
+                            @empty
+                                <p>Ingen Artikler under denne kategori</p>
+                            @endforelse
                         </div>
                     </div>
-                    @empty
-                        <p>Ingen Artikler under denne kategori</p>
-                    @endforelse
                 </div>
             </div>
     </div>
