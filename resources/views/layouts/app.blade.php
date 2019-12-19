@@ -6,25 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
-    <link href="/lib/noty.css" rel="stylesheet">
-    <link href="/lib/themes/metroui.css" rel="stylesheet">
+    <link href="lib/noty.css" rel="stylesheet">
+    <link href="lib/themes/metroui.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154778818-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-154778818-1');
+    </script>
 
     <title>{{ config('app.name', 'Love Of Portugal') }} @yield('title')</title>
 
     <!-- Styles -->
     @yield('stylesheets')
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    <script src="/lib/noty.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-        new Noty({
-            theme: 'metroui',
-            type: 'info',
-            layout: 'topRight',
-            text: 'dd'
-        }).show();
-    </script>
 </head>
 <body>
 <div id="app">
@@ -76,18 +75,6 @@
                             <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
 
                             <div class="navbar-dropdown">
-                                <a class="navbar-item" href="{{ route('post.new') }}">
-                                    Ny Artikel
-                                </a>
-                                <a class="navbar-item" href="{{ route('category.showForm') }}">
-                                    Ny Katogori
-                                </a>
-                                <a class="navbar-item" href="{{ route('about.edit') }}">
-                                    Rediger Om mig
-                                </a>
-                                <a class="navbar-item" href="{{ route('settings.edit') }}">
-                                    Side Indstillinger
-                                </a>
                                 <a class="navbar-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     Logout
@@ -100,6 +87,30 @@
                             </div>
                         </div>
                     @endif
+
+                    @if (!Auth::guest() && Auth::user()->is_admin == 1)
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link" href="#">Admin</a>
+
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" href="{{ route('post.new') }}">
+                                    Ny Artikel
+                                </a>
+                                <a class="navbar-item" href="{{ route('category.showForm') }}">
+                                    Ny Katogori
+                                </a>
+
+                                <hr class="dropdown-divider">
+
+                                <a class="navbar-item" href="{{ route('about.edit') }}">
+                                    Rediger Om mig
+                                </a>
+                                <a class="navbar-item" href="{{ route('settings.edit') }}">
+                                    Side Indstillinger
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -108,8 +119,18 @@
     @yield('content')
 </div>
 <!-- Scripts -->
+<script src="lib/noty.js" type="text/javascript"></script>
+@if(Session::has('error'))
+    <script type="text/javascript">
+        new Noty({
+            type: 'error',
+            theme: 'metroui',
+            layout: 'topRight',
+            text: '{{ Session::get('error') }}'
+        }).show();
+    </script>
+@endif
 @yield('scripts')
 <script type="text/javascript" src="{{ asset('/js/app.js') }}"></script>
-
 </body>
 </html>

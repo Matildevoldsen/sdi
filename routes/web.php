@@ -15,6 +15,7 @@ Auth::routes();
 //Main Sites
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('om-mig', 'AboutController@index')->name('about');
+Route::get('bruger/{id}', 'Auth\\UserController@view');
 
 Route::middleware(['isAdmin'])->group(function () {
     Route::get('om-mig/rediger', 'AboutController@edit')->name('about.edit');
