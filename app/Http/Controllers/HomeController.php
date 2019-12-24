@@ -14,8 +14,13 @@ class HomeController extends Controller
     {
         $setting = Setting::find(1);
 
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        if (!Auth::guest() && Auth::user()->is_admin == 1) {
+            $posts = Post::orderBy('id', 'desc')->paginate(10);
+            return view('home')->withPosts($posts)->withSetting($setting);
+        } else {
+            $posts = Post::orderBy('id', 'desc')->paginate(10);
+            return view('home')->withPosts($posts)->withSetting($setting);
+        }
 
-        return view('home')->withPosts($posts)->withSetting($setting);
     }
 }

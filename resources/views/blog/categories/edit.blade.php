@@ -46,6 +46,19 @@
 
                         <div class="field is-horizontal">
                             <div class="field-label">
+                                Offentligør
+                            </div>
+                            <div class="field-body">
+                                <label class="checkbox">
+                                    <input type="checkbox"
+                                           name="is_private">
+                                    Skal den være privat?
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
                                 <label class="desc_dk">Beskrivelse</label>
                             </div>
 

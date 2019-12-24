@@ -6,6 +6,7 @@ use App\Post;
 use App\Setting;
 use Cassandra\Set;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -39,7 +40,7 @@ class SettingsController extends Controller
         $setting->welcome_en = $request->welcome_en;
         $setting->main_site_desc = $request->main_site_desc;
 
-        if (isset($request->thumbnail) && $request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
+        if (isset($request->thumbnail) && $request->thumbnail && $path = Storage::disk('public')->put('thumbnail/'. $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'))) {
             $setting->thumbnail = basename($path);
         }
 

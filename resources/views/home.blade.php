@@ -37,26 +37,69 @@
                 <!-- START ARTICLE -->
                 @foreach ($posts as $post)
                     @foreach ($post->category as $category)
-                        <div class="card article">
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-content has-text-centered">
-                                        <p class="title article-title">{{ $post->title_dk }}</p>
-                                        <div class="tags has-addons level-item">
-                                            <span class="tag is-rounded is-info">{{ $category->title_dk }}</span>
-                                            <span class="tag is-rounded">{{ $post->created_at->diffForHumans() }}</span>
+                        @if ($post->is_private == 0  && Auth::guest() && Auth::user()->is_admin == 0)
+                            @if ($category->is_private == 0)
+                                <div class="card article">
+                                    <div class="card-content">
+                                        <div class="media">
+                                            <div class="media-content has-text-centered">
+                                                <p class="title article-title"><a class="title-link"
+                                                                                  href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">{{ $post->title_dk }}</a>
+                                                </p>
+                                                <div class="tags has-addons level-item">
+                                            <span class="tag is-rounded is-info"><a class="category-link"
+                                                                                    href="{{ route('category.show', $category->id) }}">{{ $category->title_dk }}</a></span>
+                                                    <span class="tag is-rounded">
+                                                {{ $post->created_at->diffForHumans() }}
+                                                        @if ($post->created_at->diffForHumans() !== $post->updated_at->diffForHumans())
+                                                            sidst opdateret {{ $post->updated_at->diffForHumans() }}
+                                                        @endif
+                                            </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="content article-body">
+                                            <p>
+                                            {!! Str::limit($post->content_dk, $limit = 400) !!}
+                                            <p>
+                                                <a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
+                                                    mere...</a></p>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="content article-body">
-                                    <p>
-                                    {!! Str::limit($post->content_dk, $limit = 400) !!}
-                                    <p><a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
-                                            mere...</a></p>
-                                    </p>
+                            @endif
+                        @elseif (!Auth::guest() && Auth::user()->is_admin == 1)
+                            <div class="card article">
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-content has-text-centered">
+                                            <p class="title article-title"><a class="title-link"
+                                                                              href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">{{ $post->title_dk }}</a>
+                                            </p>
+                                            <div class="tags has-addons level-item">
+                                            <span class="tag is-rounded is-info"><a class="category-link"
+                                                                                    href="{{ route('category.show', $category->id) }}">{{ $category->title_dk }}</a></span>
+                                                <span class="tag is-rounded">
+                                                {{ $post->created_at->diffForHumans() }}
+                                                    @if ($post->created_at->diffForHumans() !== $post->updated_at->diffForHumans())
+                                                        sidst opdateret {{ $post->updated_at->diffForHumans() }}
+                                                    @endif
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="content article-body">
+                                        <p>
+                                        {!! Str::limit($post->content_dk, $limit = 400) !!}
+                                        <p>
+                                            <a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
+                                                mere...</a></p>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 @endforeach
             </div>

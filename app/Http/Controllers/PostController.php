@@ -17,7 +17,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $posts = Post::all()->where('is_private', '=', '0');
         return view('blog.index')->withPosts($posts);
     }
 
@@ -49,8 +49,13 @@ class PostController extends Controller
             $post->category_id = $request->category_id;
             $post->meta_title_dk = $request->title_dk;
             $post->meta_desc_dk = $request->meta_desc_dk;
+            if (!$request->has('is_private')) {
+                $post->is_private = 0;
+            } else {
+                $post->is_private = 1;
+            }
             $post->content_dk = html_entity_decode($request->content_dk);
-            $path = $request->file('thumbnail')->store('public/thumbnails');
+            $path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'));
 
             if ($path) {
                 $post->thumbnail = basename($path);
@@ -85,12 +90,17 @@ class PostController extends Controller
         $post = Post::find($id);
         $postWithSlug = Post::where('slug', $slug)->first();
 
+        if ($post->is_private == 1 && Auth::guest() || !Auth::guest() && Auth::user()->is_admin == 0) {
+            Session::flash('error', 'Denne artikel findes ikke.');
+            return redirect()->back();
+        }
+
         if ($post) {
             return view('blog.view')->withPost($post);
         } else if ($postWithSlug) {
             return view('blog.view')->withPost($postWithSlug); //if ID is entered wrong
         } else {
-            Session::flash('message', 'Artiklen findes desværre ikke.');
+            Session::flash('error', 'Artiklen findes desværre ikke.');
             return redirect()->back();
         }
     }
@@ -134,8 +144,13 @@ class PostController extends Controller
             $post->meta_title_dk = $request->title_dk;
             $post->meta_desc_dk = $request->meta_desc_dk;
             $post->content_dk = html_entity_decode($request->content_dk);
+            if (!$request->has('is_private')) {
+                $post->is_private = 0;
+            } else {
+                $post->is_private = 1;
+            }
             if (isset($request->thumbnail) && !$request->thumbnail) {
-                $path = $request->file('thumbnail')->store('public/thumbnails');
+                $path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'));
 
                 if ($path) {
                     $post->thumbnail = basename($path);

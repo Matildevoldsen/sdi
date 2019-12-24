@@ -8,6 +8,7 @@ use App\TopCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -32,7 +33,12 @@ class CategoryController extends Controller
         $tag->top_category_id = $request->top_category_id;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
-        if ($path = $request->file('thumbnail')->store('public/thumbnail')) {
+        if (!$request->has('is_private')) {
+            $tag->is_private = 0;
+        } else {
+            $tag->is_private = 1;
+        }
+        if ($path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'))) {
             $tag->thumbnail = basename($path);
         }
         $tag->save();
@@ -45,6 +51,14 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $posts = Post::all()->where('category_id', $id);
+
+        if ($category->is_private == 1) {
+            if (!Auth::guest() && Auth::user()->is_admin == 1) {
+                return view('blog.categories.view')->withCategory($category)->withPosts($posts);
+            }
+            Session::flash('error', 'Denne katogori findes ikke.');
+            return redirect()->back();
+        }
 
         return view('blog.categories.view')->withCategory($category)->withPosts($posts);
     }
@@ -68,9 +82,14 @@ class CategoryController extends Controller
         $tag->desc_dk = $request->desc_dk;
         $tag->top_category_id = $request->top_category_id;
         $tag->desc_en = $request->desc_en;
-        if (isset($request->thumbnail) && $request->thumbnail && $path = $request->file('thumbnail')->store('public/thumbnail')) {
-            $tag->thumbnail = basename($path);
+        if (!$request->has('is_private')) {
+            $tag->is_private = 0;
+        } else {
+            $tag->is_private = 1;
         }
+        if (isset($request->thumbnail) && $request->thumbnail && $path = Storage::disk('public')->put('thumbnails/', $request->file('thumbnail'))) {
+        $tag->thumbnail = basename($path);
+    }
         $tag->save();
         Session::flash('success', 'Successfully saved your new tag!');
         return redirect()->back();

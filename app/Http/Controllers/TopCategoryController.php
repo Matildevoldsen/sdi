@@ -20,6 +20,11 @@ class TopCategoryController extends Controller
         $tag->desc_dk = $request->desc_dk;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
+        if (!$request->has('is_private')) {
+            $tag->is_private = 0;
+        } else {
+            $tag->is_private = 1;
+        }
         $tag->save();
 
         Session::flash('message', 'Katogori er oprettet!');
@@ -39,6 +44,11 @@ class TopCategoryController extends Controller
         $tag->desc_dk = $request->desc_dk;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
+        if (!$request->has('is_private')) {
+            $tag->is_private = 0;
+        } else {
+            $tag->is_private = 1;
+        }
         $tag->save();
 
         Session::flash('message', 'Katogori er gemt!');

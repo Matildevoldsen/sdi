@@ -91,3 +91,19 @@ div.column.is-8:first-child {
         margin: 0 1rem;
     }
 }
+
+.title-link {
+    color: #363636;
+
+    &:hover {
+        color: #3273dc;
+    }
+}
+
+.category-link {
+    color:#fff;
+
+    &:hover {
+        color: #f2dede;
+    }
+}
