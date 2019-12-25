@@ -37,7 +37,7 @@
                 <!-- START ARTICLE -->
                 @foreach ($posts as $post)
                     @foreach ($post->category as $category)
-                        @if ($post->is_private == 0  && Auth::guest() && Auth::user()->is_admin == 0)
+                        @if ($post->is_private == 0  && Auth::guest() || !Auth::guest() && Auth::user()->is_admin == 0)
                             @if ($category->is_private == 0)
                                 <div class="card article">
                                     <div class="card-content">

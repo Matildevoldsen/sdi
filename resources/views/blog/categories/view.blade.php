@@ -44,7 +44,7 @@
                             @endif
                             <hr/>
                             @foreach($posts as $post)
-                                @if ($post->is_private == 0 && Auth::guest() && Auth::user()->is_admin == 0)
+                                @if ($post->is_private == 0  && Auth::guest() || !Auth::guest() && Auth::user()->is_admin == 0)
                                     @if ($category->is_private == 0)
                                         <p class="title article-title has-text-centered"><a class="title-link"
                                                                                             href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">{{ $post->title_dk }}</a>

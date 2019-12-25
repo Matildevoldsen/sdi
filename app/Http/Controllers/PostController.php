@@ -54,14 +54,21 @@ class PostController extends Controller
             } else {
                 $post->is_private = 1;
             }
+            $image = $request->file('thumbnail');
+            $filename = $image->getClientOriginalName();
+            $destinationPath = 'public/thumbnail/post';
+
             $post->content_dk = html_entity_decode($request->content_dk);
-            $path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'));
 
-            if ($path) {
-                $post->thumbnail = basename($path);
+            if ($image->storeAs("$destinationPath", $filename)) {
+                $post->thumbnail = basename('post/' . $filename);
             } else {
-
-                dd($path);
+                return response()->json([
+                    'data' => [
+                        'success' => false,
+                        'errors' => 'En fejl skete med upload af billede',
+                    ]
+                ]);
             }
 
             $post->save();
@@ -149,11 +156,14 @@ class PostController extends Controller
             } else {
                 $post->is_private = 1;
             }
-            if (isset($request->thumbnail) && !$request->thumbnail) {
-                $path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'));
 
-                if ($path) {
-                    $post->thumbnail = basename($path);
+            $image = $request->file('thumbnail');
+            $filename = $image->getClientOriginalName();
+            $destinationPath = 'public/thumbnail/post';
+
+            if (isset($request->thumbnail) && !$request->thumbnail) {
+                if ($image->storeAs("$destinationPath", $filename)) {
+                    $post->thumbnail = basename('post/' . $filename);
                 } else {
                     return response()->json([
                         'data' => [

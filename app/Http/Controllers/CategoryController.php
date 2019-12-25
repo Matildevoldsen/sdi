@@ -38,8 +38,13 @@ class CategoryController extends Controller
         } else {
             $tag->is_private = 1;
         }
-        if ($path = Storage::disk('public')->put('thumbnails/' . $request->file('thumbnail')->getClientOriginalName(), $request->file('thumbnail'))) {
-            $tag->thumbnail = basename($path);
+
+        $image = $request->file('thumbnail');
+        $filename = $image->getClientOriginalName();
+        $destinationPath = 'public/thumbnail/category';
+
+        if ($image->storeAs("$destinationPath", $filename)) {
+            $tag->thumbnail = basename($image);
         }
         $tag->save();
 
@@ -87,9 +92,15 @@ class CategoryController extends Controller
         } else {
             $tag->is_private = 1;
         }
-        if (isset($request->thumbnail) && $request->thumbnail && $path = Storage::disk('public')->put('thumbnails/', $request->file('thumbnail'))) {
-        $tag->thumbnail = basename($path);
-    }
+
+        $image = $request->file('thumbnail');
+        $filename = $image->getClientOriginalName();
+        $destinationPath = 'public/thumbnail/category';
+
+
+        if (isset($request->thumbnail) && $request->thumbnail && $image->storeAs("$destinationPath", $filename)) {
+            $tag->thumbnail = basename('category/' . $filename);
+        }
         $tag->save();
         Session::flash('success', 'Successfully saved your new tag!');
         return redirect()->back();
