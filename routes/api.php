@@ -14,5 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('artikel/opret', 'PostController@store');
+Route::post('katogori/opret', 'CategoryController@store');
+Route::post('katogori/rediger/', 'CategoryController@update');
 Route::post('artikel/rediger', 'PostController@update');
 Route::post('om-mig/rediger', 'AboutController@update');

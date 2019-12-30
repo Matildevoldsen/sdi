@@ -5,7 +5,7 @@
 @section('stylesheets')
     <meta name="description" content="{{ Str::limit($category->desc_dk, $limit = 160) }}"/>
     <style type="text/css">.hero {
-            background-image: url('{{ asset('storage/thumbnail/' . $category->thumbnail) }}') !important;
+            background-image: url('{{ asset('storage/thumbnail/category/' . $category->thumbnail) }}') !important;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="content article-body">
-                            <p>{!! nl2br(e($category->desc_dk)) !!}</p>
+                            <p>{!! $category->desc_dk !!}</p>
                             @if (!Auth::guest() && Auth::user()->is_admin)
                                 <form action="{{ route('category.delete') }}" method="post">
                                     {{ csrf_field() }}

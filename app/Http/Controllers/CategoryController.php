@@ -29,11 +29,11 @@ class CategoryController extends Controller
         $this->validate($request, array('title_dk' => 'required|max:255'));
         $tag = new Category;
         $tag->title_dk = $request->title_dk;
-        $tag->desc_dk = $request->desc_dk;
+        $tag->desc_dk = html_entity_decode($request->desc_dk);
         $tag->top_category_id = $request->top_category_id;
         $tag->title_en = 'no content';
         $tag->desc_en = 'no content';
-        if (!$request->has('is_private')) {
+        if ($request->has('is_private')) {
             $tag->is_private = 0;
         } else {
             $tag->is_private = 1;
@@ -44,12 +44,27 @@ class CategoryController extends Controller
         $destinationPath = 'public/thumbnail/category';
 
         if ($image->storeAs("$destinationPath", $filename)) {
-            $tag->thumbnail = basename($image);
+            $tag->thumbnail = basename($filename);
+        } else {
+            return response()->json([
+                'data' => [
+                    'post' => $tag,
+                    'success' => false,
+                    'to' => $tag->id,
+                    'message' => 'Kan ikke uploade billede',
+                ]
+            ]);
         }
         $tag->save();
 
-        Session::flash('message', 'Katogori er oprettet!');
-        return redirect()->back();
+        return response()->json([
+            'data' => [
+                'post' => $tag,
+                'success' => true,
+                'to' => $tag->id,
+                'message' => 'Katogori Oprettet',
+            ]
+        ]);
     }
 
     public function view($id)
@@ -79,31 +94,37 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $tag = Category::find($request->id);
         $tag->title_dk = $request->title_dk;
-        $tag->title_en = $request->title_en;
-        $tag->desc_dk = $request->desc_dk;
+        $tag->title_en = 'null';
+        $tag->desc_dk = html_entity_decode($request->desc_dk);
         $tag->top_category_id = $request->top_category_id;
-        $tag->desc_en = $request->desc_en;
-        if (!$request->has('is_private')) {
+        $tag->desc_en = 'null';
+        if ($request->has('is_private')) {
             $tag->is_private = 0;
         } else {
             $tag->is_private = 1;
         }
 
         $image = $request->file('thumbnail');
-        $filename = $image->getClientOriginalName();
         $destinationPath = 'public/thumbnail/category';
 
 
-        if (isset($request->thumbnail) && $request->thumbnail && $image->storeAs("$destinationPath", $filename)) {
-            $tag->thumbnail = basename('category/' . $filename);
+        if ($request->hasFile('thumbnail') &&  $filename = $image->getClientOriginalName()) {
+            $image->storeAs("$destinationPath", $filename);
+            $tag->thumbnail = basename($filename);
         }
         $tag->save();
-        Session::flash('success', 'Successfully saved your new tag!');
-        return redirect()->back();
+        return response()->json([
+            'data' => [
+                'post' => $tag,
+                'success' => true,
+                'to' => $tag->id,
+                'message' => 'Katogori gemt',
+            ]
+        ]);
     }
 
     public function destroy(Request $request)

@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style type="text/css">
         .hero {
-            background-image: url('{{ asset('storage/thumbnail/' . $post->thumbnail) }}') !important;
+            background-image: url('{{ asset('storage/thumbnail/post/' . $post->thumbnail) }}') !important;
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
