@@ -31,7 +31,6 @@
                                         <div class="profile-preword"><span>Velkommen</span></div>
                                     </div>
                                     <h1 class="profile-title_t">
-                                        <span>Jeg hedder</span>
                                         Britt Wittrup
                                     </h1>
                                     <h2 class="profile-position">Blogger</h2></div>
