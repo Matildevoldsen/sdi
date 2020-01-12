@@ -57,6 +57,8 @@
                             <li class="list-inline-item-s">
                                 <a href="https://www.facebook.com/Love-of-Portugal-2229070847174497/" target="_blank"><i class="fa fa-facebook"></i></a>
                                 <a href="https://www.instagram.com/love_of_portugal/" target="_blank"><i class="fa fa-instagram"></i></a>
+                                <a href="https://twitter.com/LoveofPortugal1" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="mailto:info@loveofportugal.com?subject=Indhold" target="_blank"><i class="fa fa-mail"></i></a>
                             </li>
                         </ul>
                     </div>
