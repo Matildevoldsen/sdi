@@ -51,7 +51,8 @@
                             <div class="field-body">
                                 <div class="field">
                                     <p class="control">
-                                        <input class="input" id="slug" type="text" name="slug" value="{{ $article->slug }}"
+                                        <input class="input" id="slug" type="text" name="slug"
+                                               value="{{ $article->slug }}"
                                                placeholder="/post/første-dag-i-portugal" required autofocus>
                                     </p>
 
@@ -123,6 +124,9 @@
                             <div class="field-body">
                                 <select class="select" id="category" name="categories[]">
                                     @foreach($categories as $category)
+                                        @if ($category->id == $article->category_id)
+                                            <option selected value="{{ $article->category_id }}">{{ $category->title_dk }}</option>
+                                        @endif
                                         <option value='{{ $category->id }}'>{{ $category->title_dk }}</option>
                                     @endforeach
                                 </select>
