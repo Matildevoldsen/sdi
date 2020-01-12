@@ -27,9 +27,6 @@
                             </div>
                             <div class="column is-7">
                                 <div class="profile-info">
-                                    <div class="profile-items clearfix">
-                                        <div class="profile-preword"><span>Velkommen</span></div>
-                                    </div>
                                     <h1 class="profile-title_t">
                                         Britt Wittrup
                                     </h1>
