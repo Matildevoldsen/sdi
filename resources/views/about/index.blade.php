@@ -42,7 +42,7 @@
                                     </li>
                                     <li class="clearfix">
                                         <strong class="title_t">E-mail</strong>
-                                        <span class="cont">admin@loveofportugal.com</span>
+                                        <span class="cont">info@loveofportugal.com</span>
                                     </li>
                                     <li class="clearfix">
                                         <strong class="title_t">Favoritrejsemål i Portugal</strong>
