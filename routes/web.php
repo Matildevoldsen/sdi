@@ -47,3 +47,4 @@ Route::middleware(['isAdmin'])->group(function () {
 Route::get('artikel/{id}/s-{slug}', 'PostController@show')->name('post.show');
 
 Route::get('katogori/vis/{id}', 'CategoryController@view')->name('category.show');
+Route::get('search', 'SearchController@get')->name('search');

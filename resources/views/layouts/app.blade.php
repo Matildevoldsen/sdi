@@ -13,7 +13,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154778818-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-154778818-1');
@@ -70,6 +74,20 @@
                 </div>
 
                 <div class="navbar-end">
+                    <div class="navbar-item">
+                        <form action="{{ route('search') }}" method="get">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input name="q" @if (isset($query) && $query) value="{{ $query }}" @endif class="input" type="text">
+                                </div>
+                                <div class="control">
+                                    <a class="button is-info">
+                                        Search
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     @if (!Auth::guest())
                         <div class="navbar-item has-dropdown is-hoverable">
                             <a class="navbar-link" href="#">{{ Auth::user()->name }}</a>
