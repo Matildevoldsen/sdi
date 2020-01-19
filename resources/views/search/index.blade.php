@@ -162,7 +162,7 @@
                                     <p>
                                     {!! Str::limit($post->desc_dk, $limit = 400) !!}
                                     <p>
-                                        <a href="{{ route('post.show', ['id' => $category->id]) }}">Læs
+                                        <a href="{{ route('category.show', ['id' => $category->id]) }}">Læs
                                             mere...</a></p>
                                     </p>
                                 </div>
