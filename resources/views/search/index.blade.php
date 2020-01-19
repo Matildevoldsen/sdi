@@ -68,7 +68,7 @@
                                 </div>
                             @endif
                         @elseif (!Auth::guest() && Auth::user()->is_admin == 1)
-                            <div class="card article">
+                            <div class="card" style="margin-bottom: 5rem;">
                                 <div class="card-content">
                                     <div class="media">
                                         <div class="media-content has-text-centered">
@@ -140,7 +140,7 @@
                             </div>
                         @endif
                     @elseif (!Auth::guest() && Auth::user()->is_admin == 1)
-                        <div class="card article">
+                        <div class="card" style="margin-bottom: 5rem;">
                             <div class="card-content">
                                 <div class="media">
                                     <div class="media-content has-text-centered">
@@ -148,19 +148,18 @@
                                                                           href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->title_dk }}</a>
                                         </p>
                                         <div class="tags has-addons level-item">
-                                            <span class="tag is-rounded is-info">
-                                                <span class="tag is-rounded">
+                                                    <span class="tag is-rounded">
                                                 {{ $category->created_at->diffForHumans() }}
-                                                    @if ($category->created_at->diffForHumans() !== $category->updated_at->diffForHumans())
-                                                        sidst opdateret {{ $category->updated_at->diffForHumans() }}
-                                                    @endif
+                                                        @if ($category->created_at->diffForHumans() !== $category->updated_at->diffForHumans())
+                                                            sidst opdateret {{ $category->updated_at->diffForHumans() }}
+                                                        @endif
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="content article-body">
                                     <p>
-                                    {!! Str::limit($post->desc_dk, $limit = 400) !!}
+                                    {!! Str::limit($category->desc_dk, $limit = 400) !!}
                                     <p>
                                         <a href="{{ route('category.show', ['id' => $category->id]) }}">Læs
                                             mere...</a></p>
