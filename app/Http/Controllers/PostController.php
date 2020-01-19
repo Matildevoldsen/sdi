@@ -49,7 +49,7 @@ class PostController extends Controller
             $post->category_id = $request->category_id;
             $post->meta_title_dk = $request->title_dk;
             $post->meta_desc_dk = $request->meta_desc_dk;
-            if (!$request->has('is_private')) {
+            if ($request->has('is_private')) {
                 $post->is_private = 0;
             } else {
                 $post->is_private = 1;
@@ -151,17 +151,17 @@ class PostController extends Controller
             $post->meta_title_dk = $request->title_dk;
             $post->meta_desc_dk = $request->meta_desc_dk;
             $post->content_dk = html_entity_decode($request->content_dk);
-            if (!$request->has('is_private')) {
+            if ($request->has('is_private')) {
                 $post->is_private = 0;
             } else {
                 $post->is_private = 1;
             }
 
-            $image = $request->file('thumbnail');
-            $filename = $image->getClientOriginalName();
-            $destinationPath = 'public/thumbnail/post';
+            if ($request->hasFile('thumbnail')) {
+                $image = $request->file('thumbnail');
+                $filename = $image->getClientOriginalName();
+                $destinationPath = 'public/thumbnail/post';
 
-            if (isset($request->thumbnail) && !$request->thumbnail) {
                 if ($image->storeAs("$destinationPath", $filename)) {
                     $post->thumbnail = basename('post/' . $filename);
                 } else {

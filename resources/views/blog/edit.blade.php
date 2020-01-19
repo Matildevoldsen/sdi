@@ -67,6 +67,23 @@
 
                         <div class="field is-horizontal">
                             <div class="field-label">
+                                Offentligør
+                            </div>
+                            <div class="field-body">
+                                <label class="checkbox">
+                                    <input type="checkbox"
+                                           name="is_private"
+                                           @if ($article->is_private == 1)
+                                               checked
+                                           @endif
+                                           id="is_private">
+                                    Skal den være privat?
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="field is-horizontal">
+                            <div class="field-label">
                                 <label class="thumbnail">Artikel Billede</label>
                             </div>
 
@@ -125,7 +142,8 @@
                                 <select class="select" id="category" name="categories[]">
                                     @foreach($categories as $category)
                                         @if ($category->id == $article->category_id)
-                                            <option selected value="{{ $article->category_id }}">{{ $category->title_dk }}</option>
+                                            <option selected
+                                                    value="{{ $article->category_id }}">{{ $category->title_dk }}</option>
                                         @endif
                                         <option value='{{ $category->id }}'>{{ $category->title_dk }}</option>
                                     @endforeach
@@ -189,12 +207,14 @@
             var meta_desc_dk = $('#meta_desc_dk').val();
             var slug = $('#slug').val();
             var idNum = '{{ $article->id }}';
+            var is_private = $('#slug').val('#is_private');
             var categoryElement = document.getElementById("category");
             var selected = categoryElement.options[categoryElement.selectedIndex].value;
             var data = new FormData();
 
             data.append('title_dk', title_dk);
             data.append('slug', slug);
+            data.append('is_private', is_private);
             data.append('idNum', idNum);
             data.append('content_dk', content_dk);
             data.append('thumbnail', thumbnail);
