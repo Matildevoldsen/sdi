@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="control">
                                     <a class="button is-info">
-                                        Search
+                                        Søg
                                     </a>
                                 </div>
                             </div>

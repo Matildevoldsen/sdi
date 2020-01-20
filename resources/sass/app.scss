@@ -32,6 +32,10 @@ html, body {
     margin-top: -200px;
 }
 
+.card .card-content .media-content {
+    overflow-y: hidden !important;
+}
+
 .articles .content p {
     line-height: 1.9;
     margin: 15px 0;
