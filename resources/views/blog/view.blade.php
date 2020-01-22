@@ -1,10 +1,11 @@
 @extends('layouts.app')
-
+@section('title', '| ' . $post->title_dk)
 @section('stylesheets')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta name="description" content="{{ strip_tags(Str::limit($post->content_dk, $limit = 160)) }}"/>
     <style type="text/css">
         .hero {
             background-image: url('{{ asset('storage/thumbnail/post/' . $post->thumbnail) }}') !important;

@@ -15,6 +15,8 @@
                 height: 500px;
             }
         </style>
+
+        <meta name="description" content="{{ strip_tags($setting->main_site_desc) }}"/>
     @endif
 @endsection
 

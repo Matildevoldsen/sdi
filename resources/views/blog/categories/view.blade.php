@@ -3,7 +3,7 @@
 @section('title', '| ' . $category->title_dk )
 
 @section('stylesheets')
-    <meta name="description" content="{{ Str::limit($category->desc_dk, $limit = 160) }}"/>
+    <meta name="description" content="{{ strip_tags(Str::limit($category->desc_dk, $limit = 160)) }}"/>
     <style type="text/css">.hero {
             background-image: url('{{ asset('storage/thumbnail/category/' . $category->thumbnail) }}') !important;
             background-position: center;

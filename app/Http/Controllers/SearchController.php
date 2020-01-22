@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\Setting;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
     public function get(Request $request) {
+        $setting = Setting::find(1);
         $q = $request->q;
         $posts = Post::where('title_dk','LIKE','%'.$q.'%')
             ->orWhere('content_dk','LIKE','%'.$q.'%')->
@@ -17,6 +19,6 @@ class SearchController extends Controller
         $SearchCategories = Category::where('title_dk','LIKE','%'.$q.'%')
             ->orWhere('desc_dk','LIKE','%'.$q.'%')->get();;
 
-        return view('search.index')->withPosts($posts)->withSearchCategories($SearchCategories)->withQuery($q);
+        return view('search.index')->withPosts($posts)->withSearchCategories($SearchCategories)->withQuery($q)->withSetting($setting);
     }
 }

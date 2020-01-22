@@ -27,6 +27,20 @@
 
     <!-- Styles -->
     @yield('stylesheets')
+    <style type="text/css">
+        @import url(https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+
+        .footer-icon {
+            font-size: 18px;
+            color: #000;
+            margin-right: 15px;
+            padding-bottom: 15px;
+        }
+
+        .footer-icon:hover {
+            color: #0B90C4;
+        }
+    </style>
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -78,7 +92,10 @@
                         <form action="{{ route('search') }}" method="get">
                             <div class="field has-addons">
                                 <div class="control">
-                                    <input name="q" @if (isset($query) && $query) value="{{ $query }}" @endif class="input" type="text">
+                                    <label for="search">
+                                        <input id="search" name="q" @if (isset($query) && $query) value="{{ $query }}"
+                                               @endif class="input" type="text">
+                                    </label>
                                 </div>
                                 <div class="control">
                                     <a class="button is-info">
@@ -135,6 +152,61 @@
     </nav>
 
     @yield('content')
+
+    <footer class="footer">
+        <div class="container is-center">
+            <div class="columns">
+                <div class="column is-6">
+                    <h4 class="bd-footer-title">
+                        <strong>Love Of Portugal</strong> powered by <strong>Wimm Media</strong>. Copyright Love Of Portugal &copy; {{ now()->year }}-{{ now()->year+1 }}
+                    </h4>
+                </div>
+                <div class="column is-6">
+                    <a href="https://www.facebook.com/Love-of-Portugal-2229070847174497/" class="footer-icon"   target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/love_of_portugal/"  class="footer-icon" target="_blank"><i class="fa fa-instagram"></i></a>
+                    <a href="https://twitter.com/LoveofPortugal1" class="footer-icon" target="_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="mailto:info@loveofportugal.com?subject=Indhold" class="footer-icon" target="_blank"><i class="fa fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <div class="bd-footer-links">
+                <div class="columns">
+                    <div class="column is-3">
+                        <a class="bd-footer-link-title has-text-black-bis" href="#">Sider</a>
+
+                        <p class="bd-footer-link-title">
+                            <a href="{{ route('home') }}">Hjem</a>
+                        </p>
+
+                        <p class="{{ route('about') }}">
+                            <a href="https://bulma.io/blog">Om Mig</a>
+                        </p>
+
+                        <p class="bd-footer-link">
+                            <a href="{{ route('login') }}">
+                                Login
+                            </a>
+                        </p>
+                    </div>
+
+                    @if ($topCategories)
+                        @foreach ($topCategories as $topCategory)
+                            <div class="column is-3">
+                                <a class="bd-footer-link-title has-text-black-bis" href="#">{{ $topCategory->title_dk }}</a>
+                                @foreach ($categories as $category)
+                                    @if ($category->top_category_id == $topCategory->id)
+                                        <p class="bd-footer-link-title">
+                                            <a href="{{ route('category.show', $category->id) }}">{{ $category->title_dk }}</a>
+                                        </p>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 <!-- Scripts -->
 <script src="lib/noty.js" type="text/javascript"></script>

@@ -3,7 +3,7 @@
 @section('title', '| Søg')
 
 @section('stylesheets')
-
+    <meta name="description" content="{{ $setting->main_site_desc }}"/>
 @endsection
 
 @section('content')
@@ -24,7 +24,7 @@
                         </div>
                     </form>
                     <p>Du søgte på <b>{{ $query }}</b>. Der er <b>{{ $posts->count() }}</b> artikler der matcher
-                        <b>{{ $query }}</b> og <b>{{ $searchCategories->count() }}</b> katogorier.</p>
+                        <b>{{ $query }}</b> og <b>{{ $searchCategories->count() }}</b> kategorier.</p>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                 </div>
 
             </section>
-        @endif
+    @endif
     <!-- END ARTICLE FEED -->
         <section>
             <div class="column is-8 is-offset-2">
@@ -165,7 +165,6 @@
                                     <p>
                                         <a href="{{ route('category.show', ['id' => $category->id]) }}">Læs
                                             mere...</a></p>
-                                    </p>
                                 </div>
                             </div>
                         </div>
