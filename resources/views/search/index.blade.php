@@ -108,7 +108,7 @@
     <!-- END ARTICLE FEED -->
         <section>
             <div class="column is-8 is-offset-2">
-                <h2 class="title has-text-centered" style="margin-top: 5px;">Katogorier</h2>
+                <h2 class="title has-text-centered" style="margin-top: 5px;">Kategorier</h2>
                 <!-- START ARTICLE -->
                 @foreach ($searchCategories as $category)
                     @if ($category->is_private == 0  && Auth::guest() || !Auth::guest() && Auth::user()->is_admin == 0)
