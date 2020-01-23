@@ -3,6 +3,10 @@
 @section('title', '| ' . $category->title_dk )
 
 @section('stylesheets')
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="{{ strip_tags(Str::limit($category->desc_dk, $limit = 160)) }}" />
+    <meta property="og:url" content="{{ Request::fullUrl() }}" />
+    <meta property="og:image" content="{{ asset('storage/thumbnail/category/' . $category->thumbnail) }}"/>
     <meta name="description" content="{{ strip_tags(Str::limit($category->desc_dk, $limit = 160)) }}"/>
     <style type="text/css">.hero {
             background-image: url('{{ asset('storage/thumbnail/category/' . $category->thumbnail) }}') !important;

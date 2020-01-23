@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', '| ' . $post->title_dk)
 @section('stylesheets')
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="{{ strip_tags(Str::limit($post->content_dk, $limit = 160)) }}" />
+    <meta property="og:url" content="{{ Request::fullUrl() }}" />
+    <meta property="og:image" content="{{ asset('storage/thumbnail/post/' . $post->thumbnail) }}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet'
           href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>

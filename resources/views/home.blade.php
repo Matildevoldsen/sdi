@@ -6,6 +6,8 @@
           href='https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.9.1/css/OverlayScrollbars.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @if ($setting)
+        <meta property="og:url" content="{{ Request::fullUrl() }}" />
+        <meta property="og:image" content="{{ asset('storage/thumbnail/' . $setting->thumbnail) }}"/>
         <style type="text/css">
             .hero {
                 background-image: url('{{ asset('storage/thumbnail/' . $setting->thumbnail) }}') !important;
