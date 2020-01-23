@@ -4,6 +4,8 @@
 
 @section('stylesheets')
     <meta property="og:type" content="article" />
+    <meta property="og:image:width" content="450"/>
+    <meta property="og:image:height" content="298"/>
     <meta property="og:description" content="{{ strip_tags(Str::limit($category->desc_dk, $limit = 160)) }}" />
     <meta property="og:url" content="{{ Request::fullUrl() }}" />
     <meta property="og:image" content="{{ asset('storage/thumbnail/category/' . $category->thumbnail) }}"/>

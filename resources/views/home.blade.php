@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @if ($setting)
         <meta property="og:url" content="{{ Request::fullUrl() }}" />
+        <meta property="og:image:width" content="450"/>
+        <meta property="og:image:height" content="298"/>
         <meta property="og:image" content="{{ asset('storage/thumbnail/' . $setting->thumbnail) }}"/>
         <style type="text/css">
             .hero {
