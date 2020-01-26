@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+    <!-- Styles -->
+    @yield('stylesheets')
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,8 +28,6 @@
 
     <title>{{ config('app.name', 'Love Of Portugal') }} @yield('title')</title>
 
-    <!-- Styles -->
-    @yield('stylesheets')
     <style type="text/css">
         @import url(https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
 
@@ -178,8 +179,8 @@
                             <a href="{{ route('home') }}">Hjem</a>
                         </p>
 
-                        <p class="{{ route('about') }}">
-                            <a href="https://bulma.io/blog">Om Mig</a>
+                        <p class="bd-footer-link-title">
+                            <a href="{{ route('about')}}">Om Mig</a>
                         </p>
 
                         <p class="bd-footer-link">
