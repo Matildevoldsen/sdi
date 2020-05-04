@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="content article-body">
                                             <p>
-                                            {!! Str::limit($post->content_dk, $limit = 400) !!}
+                                            {!! strip_tags(Str::limit($post->content_dk, $limit = 400), '<p><b><strong><i><ul><li>') !!}
                                             <p>
                                                 <a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
                                                     mere...</a></p>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="content article-body">
                                         <p>
-                                        {!! Str::limit($post->content_dk, $limit = 400) !!}
+                                        {!! strip_tags(Str::limit($post->content_dk, $limit = 400),  '<p><b><strong><i><ul><li>') !!}
                                         <p>
                                             <a href="{{ route('post.show', ['id' => $post->id, 'slug' => $post->slug]) }}">Læs
                                                 mere...</a></p>

@@ -159,7 +159,7 @@
             <div class="columns">
                 <div class="column is-6">
                     <h4 class="bd-footer-title">
-                        <strong>Love Of Portugal</strong> powered by <strong>Wimm Media</strong>. Copyright Love Of Portugal &copy; {{ now()->year }}-{{ now()->year+1 }}
+                        <strong>Love Of Portugal</strong> powered by <strong><a href="https://wimm.media/">Wimm Media</a></strong>. Copyright Love Of Portugal &copy; {{ now()->year }}-{{ now()->year+1 }}
                     </h4>
                 </div>
                 <div class="column is-6">
